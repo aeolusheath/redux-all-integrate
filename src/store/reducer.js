@@ -1,17 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2019-12-22 09:56:48
- * @LastEditTime : 2019-12-22 15:52:26
+ * @LastEditTime : 2019-12-22 16:17:41
  */
 import {CHANGE_INPUT, ADD_ITEM, DELETE_ITEM, GET_LIST} from './actionTypes'
 
 const defaultState = {
   inputValue: '输入待办事项',
-  list: [
-    '8点吃早饭',
-    '9点晨会',
-    '10点代码review'
-  ]
+  list: []
 }
 
 // 图书管理员，处理借书还书动作，action就是动作类型

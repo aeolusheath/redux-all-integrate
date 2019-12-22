@@ -1,7 +1,7 @@
 /*
  * @Author: kevin
  * @Date: 2019-12-22 09:36:54
- * @LastEditTime : 2019-12-22 15:54:02
+ * @LastEditTime : 2019-12-22 16:14:46
  */
 import React, { Component } from 'react';
 import store from './store/index'
@@ -39,8 +39,10 @@ class TodoList extends Component {
   }
   async getList() {
     try {
-      let data = await axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList')
-      const {data: { data: { list: ultiMatelist }}} = data
+      
+      let data = await axios.get('https://api.myjson.com/bins/m4454') // myjson.com
+      // let data = await axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList')
+      const { list: ultiMatelist } =  data.data
       store.dispatch(getListAction(ultiMatelist))
     } catch(err) {
       console.error('请求数据失败', err)
