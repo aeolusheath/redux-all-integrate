@@ -1,12 +1,13 @@
 /*
  * @Author: kevin
  * @Date: 2019-12-22 09:36:54
- * @LastEditTime : 2019-12-22 15:29:17
+ * @LastEditTime : 2019-12-22 15:54:02
  */
 import React, { Component } from 'react';
 import store from './store/index'
-import { changeInputAction, deleteItemAction ,addItemAction } from './store/actionCreator'
+import { changeInputAction, deleteItemAction ,addItemAction, getListAction } from './store/actionCreator'
 import TodoListUI from './TodoListUI'
+import axios from 'axios'
 
 class TodoList extends Component {
   constructor(props) {
@@ -36,8 +37,19 @@ class TodoList extends Component {
   deleteItem(index) {
     store.dispatch(deleteItemAction(index))
   }
+  async getList() {
+    try {
+      let data = await axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList')
+      const {data: { data: { list: ultiMatelist }}} = data
+      store.dispatch(getListAction(ultiMatelist))
+    } catch(err) {
+      console.error('请求数据失败', err)
+    }
+  }
+  componentDidMount() {
+    this.getList()
+  }
   render() { 
-
     return <TodoListUI
               inputValue = {this.state.inputValue}
               changeInputValue = {this.changeInputValue}

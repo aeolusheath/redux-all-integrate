@@ -1,9 +1,9 @@
 /*
  * @Author: your name
  * @Date: 2019-12-22 09:56:48
- * @LastEditTime : 2019-12-22 15:29:47
+ * @LastEditTime : 2019-12-22 15:52:26
  */
-import {CHANGE_INPUT, ADD_ITEM, DELETE_ITEM } from './actionTypes'
+import {CHANGE_INPUT, ADD_ITEM, DELETE_ITEM, GET_LIST} from './actionTypes'
 
 const defaultState = {
   inputValue: '输入待办事项',
@@ -32,6 +32,11 @@ export default (state = defaultState, action) => {
     // let newState = JSON.parse(JSON.stringify(defaultState)) wrong
     let newState = JSON.parse(JSON.stringify(state))
     newState.list.splice(action.value, 1)
+    return newState;
+  }
+  if (action.type === GET_LIST) {
+    let newState = JSON.parse(JSON.stringify(state))
+    newState.list = action.list
     return newState;
   }
   return state
