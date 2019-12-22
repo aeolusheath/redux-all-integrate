@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-22 09:36:54
- * @LastEditTime : 2019-12-22 10:52:28
+ * @LastEditTime : 2019-12-22 11:14:16
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /demo01/src/TodoList.js
@@ -14,7 +14,7 @@ import {
 } from 'antd'
 
 import store from './store/index'
-
+import {CHANGE_INPUT, ADD_ITEM, DELETE_ITEM } from './store/actionTypes'
 
 class TodoList extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class TodoList extends Component {
   }
   changeInputValue(e) {
     const action = {
-      type: 'changeInput',
+      type: CHANGE_INPUT,
       value: e.target.value
     }
     store.dispatch(action);
@@ -43,7 +43,7 @@ class TodoList extends Component {
   addItem(){
     let value = this.state.inputValue
     let action = {
-      type: 'addItem',
+      type: ADD_ITEM,
       value
     }
     store.dispatch(action)
@@ -52,7 +52,7 @@ class TodoList extends Component {
     let value = index
     console.log(index, 'index---')
     let action = {
-      type: 'deleteItem',
+      type: DELETE_ITEM,
       value
     }
     store.dispatch(action)
