@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-22 09:36:54
- * @LastEditTime : 2019-12-22 11:14:16
+ * @LastEditTime : 2019-12-22 11:28:15
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /demo01/src/TodoList.js
@@ -15,7 +15,7 @@ import {
 
 import store from './store/index'
 import {CHANGE_INPUT, ADD_ITEM, DELETE_ITEM } from './store/actionTypes'
-
+import { changeInputAction, deleteItemAction ,addItemAction } from './store/actionCreator'
 class TodoList extends Component {
   constructor(props) {
     super(props);
@@ -34,28 +34,27 @@ class TodoList extends Component {
     this.setState(store.getState())
   }
   changeInputValue(e) {
-    const action = {
-      type: CHANGE_INPUT,
-      value: e.target.value
-    }
-    store.dispatch(action);
+    // const action = {
+    //   type: CHANGE_INPUT,
+    //   value: e.target.value
+    // }
+    store.dispatch(changeInputAction(e.target.value));
   }
   addItem(){
-    let value = this.state.inputValue
-    let action = {
-      type: ADD_ITEM,
-      value
-    }
-    store.dispatch(action)
+    // let value = this.state.inputValue
+    // let action = {
+    //   type: ADD_ITEM,
+    //   value
+    // }
+    store.dispatch(addItemAction(this.state.inputValue))
   }
   deleteItem(index) {
-    let value = index
-    console.log(index, 'index---')
-    let action = {
-      type: DELETE_ITEM,
-      value
-    }
-    store.dispatch(action)
+    // let value = index
+    // let action = {
+    //   type: DELETE_ITEM,
+    //   value
+    // }
+    store.dispatch(deleteItemAction(index))
   }
   render() { 
     return ( 
@@ -65,6 +64,7 @@ class TodoList extends Component {
             placeholder={this.state.inputValue}
             style= {{width: 250, marginRight: 20}}  
             onChange = { this.changeInputValue }
+            value = { this.state.inputValue }
           />
           <Button type="primary" onClick={this.addItem}>
             添加
