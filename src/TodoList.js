@@ -1,30 +1,24 @@
 /*
- * @Author: your name
+ * @Author: kevin
  * @Date: 2019-12-22 09:36:54
- * @LastEditTime : 2019-12-22 11:28:15
- * @LastEditors  : Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /demo01/src/TodoList.js
+ * @LastEditTime : 2019-12-22 15:29:17
  */
 import React, { Component } from 'react';
-import {
-  Input,
-  Button,
-  List
-} from 'antd'
-
 import store from './store/index'
-import {CHANGE_INPUT, ADD_ITEM, DELETE_ITEM } from './store/actionTypes'
 import { changeInputAction, deleteItemAction ,addItemAction } from './store/actionCreator'
+import TodoListUI from './TodoListUI'
+
 class TodoList extends Component {
   constructor(props) {
     super(props);
     // this.state = {  }
     this.state = store.getState()
+    
     this.changeInputValue = this.changeInputValue.bind(this)
-    this.storeChange = this.storeChange.bind(this)
     this.addItem = this.addItem.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
+    this.storeChange = this.storeChange.bind(this)
+
     
     // store 发生变化的时候，要通知到当前组件，更新当前组件的state, 不然当前组件的状态是不会变化
     store.subscribe(this.storeChange) 
@@ -34,52 +28,23 @@ class TodoList extends Component {
     this.setState(store.getState())
   }
   changeInputValue(e) {
-    // const action = {
-    //   type: CHANGE_INPUT,
-    //   value: e.target.value
-    // }
     store.dispatch(changeInputAction(e.target.value));
   }
   addItem(){
-    // let value = this.state.inputValue
-    // let action = {
-    //   type: ADD_ITEM,
-    //   value
-    // }
     store.dispatch(addItemAction(this.state.inputValue))
   }
   deleteItem(index) {
-    // let value = index
-    // let action = {
-    //   type: DELETE_ITEM,
-    //   value
-    // }
     store.dispatch(deleteItemAction(index))
   }
   render() { 
-    return ( 
-      <div style={{margin: 20}}>
-        <div> 
-          <Input 
-            placeholder={this.state.inputValue}
-            style= {{width: 250, marginRight: 20}}  
-            onChange = { this.changeInputValue }
-            value = { this.state.inputValue }
-          />
-          <Button type="primary" onClick={this.addItem}>
-            添加
-          </Button>
-        </div>
-        <div style={{margin: 10, marginLeft: 0,  width: 330}}>
-          <List 
-            bordered
-            dataSource = {this.state.list}
-            renderItem = {
-              (item, index) => (<List.Item onClick={()=>this.deleteItem(index)}>{item}</List.Item>)
-            }
-          />
-        </div>
-      </div> );
+
+    return <TodoListUI
+              inputValue = {this.state.inputValue}
+              changeInputValue = {this.changeInputValue}
+              addItem = {this.addItem}
+              list = {this.state.list}
+              deleteItem = { this.deleteItem }
+           />
   }
 }
  
