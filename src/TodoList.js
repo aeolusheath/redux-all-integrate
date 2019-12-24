@@ -5,7 +5,7 @@
  */
 import React, { Component } from 'react';
 import store from './store/index'
-import { changeInputAction, deleteItemAction ,addItemAction, getListAction } from './store/actionCreator'
+import { changeInputAction, deleteItemAction ,addItemAction, getListAction, getTodoList } from './store/actionCreator'
 import TodoListUI from './TodoListUI'
 import axios from 'axios'
 // import DynamicForm from './dynamic-form/Dynamic-form'
@@ -41,15 +41,17 @@ class TodoList extends Component {
     store.dispatch(deleteItemAction(index))
   }
   async getList() {
-    try {
+    // try {
       
-      let data = await axios.get('https://api.myjson.com/bins/m4454') // myjson.com
-      // let data = await axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList')
-      const { list: ultiMatelist } =  data.data
-      store.dispatch(getListAction(ultiMatelist))
-    } catch(err) {
-      console.error('请求数据失败', err)
-    }
+    //   let data = await axios.get('https://api.myjson.com/bins/m4454') // myjson.com
+    //   // let data = await axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList')
+    //   const { list: ultiMatelist } =  data.data
+    //   store.dispatch(getListAction(ultiMatelist))
+    // } catch(err) {
+    //   console.error('请求数据失败', err)
+    // }
+    const action = getTodoList()
+    store.dispatch(action) // 执行action函数
   }
   componentDidMount() {
     this.getList()
