@@ -8,6 +8,9 @@ import store from './store/index'
 import { changeInputAction, deleteItemAction ,addItemAction, getListAction } from './store/actionCreator'
 import TodoListUI from './TodoListUI'
 import axios from 'axios'
+// import DynamicForm from './dynamic-form/Dynamic-form'
+// import Test from './dynamic-form/Dynamic-form-2'
+
 
 class TodoList extends Component {
   constructor(props) {
@@ -52,13 +55,19 @@ class TodoList extends Component {
     this.getList()
   }
   render() { 
-    return <TodoListUI
-              inputValue = {this.state.inputValue}
-              changeInputValue = {this.changeInputValue}
-              addItem = {this.addItem}
-              list = {this.state.list}
-              deleteItem = { this.deleteItem }
-           />
+    return(
+      <>
+        {/* <DynamicForm/> */}
+        {/* <Test /> */}
+        <TodoListUI
+            inputValue = {this.state.inputValue}
+            changeInputValue = {this.changeInputValue}
+            addItem = {this.addItem}
+            list = {this.state.list}
+            deleteItem = { this.deleteItem }
+          />
+      </>
+    )
   }
 }
  
