@@ -11,7 +11,12 @@ import reducer from './reducer'
 
 // step 2
 import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
+// import thunk from 'redux-thunk'
+
+// step 3 
+import createSagaMiddleware from 'redux-saga'
+import mySagas from './sagas'
+const sagaMiddleware = createSagaMiddleware()
 
 // step 1
 // const store = createStore() // 图书仓库，但是此时并没有图书管理员【只能图书管理员执行操作】
@@ -25,11 +30,17 @@ import thunk from 'redux-thunk'
 const composeEnhancers =  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}):compose
 
-const enhancer = composeEnhancers(applyMiddleware(thunk))
+// step 2 
+// const enhancer = composeEnhancers(applyMiddleware(thunk))
+
+// step 3
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware))
 
 const store = createStore(
   reducer, /* preloadedState, */
   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // 添加chrome浏览器扩展
   enhancer
 );
+sagaMiddleware.run(mySagas)
+
 export default store;

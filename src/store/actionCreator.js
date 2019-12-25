@@ -3,7 +3,7 @@
  * @Date: 2019-12-22 11:19:06
  * @LastEditTime : 2019-12-22 15:51:16
  */
-import {CHANGE_INPUT, ADD_ITEM, DELETE_ITEM, GET_LIST } from './actionTypes'
+import {CHANGE_INPUT, ADD_ITEM, DELETE_ITEM, GET_LIST, GET_MY_LIST } from './actionTypes'
 import axios from 'axios'
 
 export const changeInputAction = (value)=>{
@@ -53,3 +53,7 @@ export const getTodoList = () => {
   }
 
 }
+
+// redux-saga
+
+export const getMyListAction = ()=>({ type: GET_MY_LIST})
